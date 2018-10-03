@@ -1,0 +1,29 @@
+CREATE DATABASE lab4;
+
+CREATE TABLE customers(
+  customer_id int,
+  cust_name varchar(255),
+  city varchar(255),
+  grade int,
+  salesman_id int
+);
+
+SELECT * FROM customers WHERE grade > 100;
+SELECT * FROM customers WHERE city = 'New York' AND grade > 100;
+SELECT * FROM customers WHERE city = 'New York' OR grade > 100;
+SELECT * FROM customers WHERE city = 'Paris' OR city = 'Rome';
+SELECT * FROM customers WHERE cust_name LIKE 'B%';
+
+CREATE TABLE orders(
+  order_id serial PRIMARY KEY,
+  customer_id int,
+  description text,
+  purch_amt int
+);
+
+SELECT * FROM orders WHERE customer_id IN (SELECT customer_id FROM customers WHERE city = 'New York');
+SELECT * FROM customers WHERE customer_id IN (SELECT customer_id FROM orders GROUP BY customer_id HAVING COUNT(order_id) > 10);
+SELECT SUM(purch_amt) FROM orders;
+SELECT avg(purch_amt) FROM orders;
+SELECT * FROM customers WHERE cust_name IS NOT NULL;
+SELECT MAX(purch_amt) FROM orders;
