@@ -1,0 +1,13 @@
+CREATE DATABASE lab7;
+
+CREATE INDEX index1 ON countries USING hash (name); 
+
+CREATE INDEX index2 ON countries USING hash (name, surname); 
+
+CREATE UNIQUE INDEX index3 ON employees (salary); 
+
+CREATE INDEX index4 ON employees (substring(name from 1 to 4)); 
+
+CREATE INDEX index5 ON employees (department_id, salary); 
+
+CREATE INDEX index6 ON departments (department_id, budget); 
